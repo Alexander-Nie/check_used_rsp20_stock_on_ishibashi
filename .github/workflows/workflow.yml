@@ -2,29 +2,43 @@ name: Check Used Items
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
+    - cron: '*/5 * * * *'  # Run every 5 minutes
+  workflow_dispatch:  # Allow manual triggers
 
 jobs:
   check-used-items:
     runs-on: ubuntu-latest
+    
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true  # Cancel running jobs if new one is triggered
+    
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v4  # Updated to v4
+    
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5  # Updated to v5
       with:
-        python-version: '3.8'
+        python-version: '3.11'  # Updated to newer Python version
+        cache: 'pip'  # Enable pip caching
+    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requests beautifulsoup4 pytz
+        pip install -r requirements.txt  # Best practice: use requirements.txt
+      
     - name: Run script
-      run: python check_used_items.py
+      run: |
+        python check_used_items.py
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        
     - name: Upload log file
-      uses: actions/upload-artifact@v2
+      if: always()  # Upload logs even if script fails
+      uses: actions/upload-artifact@v4  # Updated to v4
       with:
-        name: logs
+        name: logs-${{ github.run_id }}
         path: check_used_items.log
+        retention-days: 90  # Keep logs for 90 days
