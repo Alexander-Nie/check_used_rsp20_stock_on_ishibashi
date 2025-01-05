@@ -2,7 +2,7 @@ name: Check Used Items
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Run every 5 minutes
+    - cron: '0 */4 * * *'  # Run every 4 hour
   workflow_dispatch:  # Allow manual triggers
 
 jobs:
