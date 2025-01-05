@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import os
+import datetime
+import pytz
 
 def send_telegram_message(message):
     """Send a message to a Telegram user specified by chat ID."""
@@ -9,7 +11,19 @@ def send_telegram_message(message):
     url = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}&text={message}"
     requests.get(url)
 
+
+def check_time_and_send_health_message():
+    """Check if the current time is between 14:00 and 15:00 in Japan and send a health check message."""
+    japan_time_zone = pytz.timezone('Asia/Tokyo')
+    current_japan_time = datetime.datetime.now(japan_time_zone)
+    if current_japan_time.hour == 14:
+        send_telegram_message('Check RSP20 Stock Health OK')
+
 def main():
+    # First, perform the health check message.
+    check_time_and_send_health_message()
+
+
     url = 'https://www.ishibashi.co.jp/ec/search/?PSTA=&PEND=&SWD=YAMAHA%E3%80%80RSP20&EWD=&CAT1=&CAT2=&CAT3=&SRT=3&LMT=24&TSEL=0'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
