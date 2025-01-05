@@ -11,22 +11,25 @@ jobs:
     
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true  # Cancel running jobs if new one is triggered
+      cancel-in-progress: true
+    
+    permissions:
+      contents: write  # Required for pushing logs
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4  # Updated to v4
+      uses: actions/checkout@v4
     
     - name: Set up Python
-      uses: actions/setup-python@v5  # Updated to v5
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.11'  # Updated to newer Python version
-        cache: 'pip'  # Enable pip caching
+        python-version: '3.11'
+        cache: 'pip'
     
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Best practice: use requirements.txt
+        pip install -r requirements.txt
       
     - name: Run script
       run: |
@@ -35,10 +38,12 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         
-    - name: Upload log file
-      if: always()  # Upload logs even if script fails
-      uses: actions/upload-artifact@v4  # Updated to v4
-      with:
-        name: logs-${{ github.run_id }}
-        path: check_used_items.log
-        retention-days: 90  # Keep logs for 90 days
+    - name: Commit and push logs
+      if: always()  # Run even if script fails
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add check_used_items.log
+        # Only commit if there are changes
+        git diff-index --quiet HEAD || git commit -m "Update logs [skip ci]"
+        git push
