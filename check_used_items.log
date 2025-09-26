@@ -5957,3 +5957,4 @@
 09-26-2025 01:13:58 - 执行过程中出错: HTTPSConnectionPool(host='www.ishibashi.co.jp', port=443): Max retries exceeded with url: /ec/search/?PSTA=&PEND=&SWD=YAMAHA%E3%80%80RSP20&EWD=&CAT1=&CAT2=&CAT3=&SRT=3&LMT=24&TSEL=0 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7fbebc719790>: Failed to resolve 'www.ishibashi.co.jp' ([Errno -3] Temporary failure in name resolution)"))
 09-26-2025 02:57:33 - 09-26-2025 11:57:33: Used RSP20 has stock: 0
 09-26-2025 03:32:55 - 09-26-2025 12:32:55: Used RSP20 has stock: 0
+09-26-2025 04:19:00 - 09-26-2025 13:19:00: Used RSP20 has stock: 0
