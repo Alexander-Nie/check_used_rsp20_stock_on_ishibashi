@@ -1,4 +1,33 @@
 {
-  "last_notification": "2025-05-09",
-  "items": {}
+  "last_notification": "2025-11-03",
+  "items": {
+    "000000055755": {
+      "title": "YAMAHA / REVSTAR RSP20 スイフトブルー (SWB) ヤマハ[日本製]",
+      "price": "¥269,500",
+      "shop": "池袋店",
+      "href": "https://store.ishibashi.co.jp/view/item/000000055755",
+      "url": "https://store.ishibashi.co.jp/view/item/000000055755"
+    },
+    "000000040690": {
+      "title": "YAMAHA / REVSTAR RSP20 Moonlight Blue 【S/N IKK250E】【アウトレット特価】",
+      "price": "Sold Out",
+      "shop": "名古屋栄店",
+      "href": "https://store.ishibashi.co.jp/view/item/000000040690",
+      "url": "https://store.ishibashi.co.jp/view/item/000000040690"
+    },
+    "000000058970": {
+      "title": "YAMAHA / REVSTAR RSP20 スイフトブルー (SWB) [長期展示アウトレット特価][重量:4.35kg]【S/N:IKX428E】【池袋店】",
+      "price": "¥231,000",
+      "shop": "池袋店",
+      "href": "https://store.ishibashi.co.jp/view/item/000000058970",
+      "url": "https://store.ishibashi.co.jp/view/item/000000058970"
+    },
+    "000000059048": {
+      "title": "YAMAHA / REVSTAR RSP20X ラスティーブラスチャコール (RBC) [B級アウトレット特価][4.01kg]【ILJ312E】【池袋店】",
+      "price": "¥236,500",
+      "shop": "池袋店",
+      "href": "https://store.ishibashi.co.jp/view/item/000000059048",
+      "url": "https://store.ishibashi.co.jp/view/item/000000059048"
+    }
+  }
 }
