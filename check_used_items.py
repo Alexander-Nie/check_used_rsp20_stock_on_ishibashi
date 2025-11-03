@@ -202,8 +202,6 @@ def compare_and_notify(current_items, cached_data):
     cached_data["items"] = current_items
     return cached_data
 def main():
-    # 首先执行健康检查
-    check_time_and_send_health_message()
    
     # 加载缓存的商品数据
     cache_data = load_cache()
@@ -211,17 +209,30 @@ def main():
     # 抓取页面
     url = 'https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20'
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=20)
         logging.info(f"GET {url} -> status {response.status_code}, length {len(response.text)}")
         # 保存原始HTML以便在GitHub Actions中作为artifact调试
         save_debug_html(response.text, name_prefix='rsp20_search')
-        soup = BeautifulSoup(response.text, 'html.parser')
+        if response.status_code != 200:
+            raise RuntimeError(f"HTTP {response.status_code}")
+
+        # 解析HTML
+        try:
+            soup = BeautifulSoup(response.text, 'html.parser')
+        except Exception as parse_e:
+            raise RuntimeError(f"HTML解析失败: {parse_e}")
        
         # 提取所有中古商品详细信息
-        current_used_items = extract_used_item_details(soup)
+        try:
+            current_used_items = extract_used_item_details(soup)
+        except Exception as extract_e:
+            raise RuntimeError(f"提取中古商品失败: {extract_e}")
         used_count = len(current_used_items)
         logging.info(f"{get_japan_time()}: Used RSP20 has stock: {used_count}")
        
+        # 解析成功后再做健康检查（仅在14点发送一次）
+        check_time_and_send_health_message()
+
         if used_count > 0:
             # 比较当前数据和缓存数据，并发送相应通知
             updated_cache = compare_and_notify(current_used_items, cache_data)
@@ -238,7 +249,7 @@ def main():
                 save_cache(cache_data)
             else:
                 logging.info(f"{get_japan_time()}: No Used Data: RSP20")
-                send_telegram_message("No Data: RSP20")
+                #send_telegram_message("No Data: RSP20")
            
     except Exception as e:
         error_message = f"执行过程中出错: {str(e)}"
