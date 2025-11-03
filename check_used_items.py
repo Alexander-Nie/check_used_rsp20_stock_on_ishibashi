@@ -46,6 +46,22 @@ def save_cache(cache_data):
             json.dump(cache_data, f, ensure_ascii=False, indent=2)
     except Exception as e:
         logging.error(f"保存缓存文件出错: {e}")
+def save_debug_html(html_text, name_prefix='rsp20_search'):
+    """保存抓取到的HTML到本地，包含时间戳文件与latest快捷文件"""
+    try:
+        timestamp = datetime.datetime.now(japan_timezone).strftime('%Y%m%d_%H%M%S')
+        debug_dir = 'debug_html'
+        if not os.path.exists(debug_dir):
+            os.makedirs(debug_dir, exist_ok=True)
+        timestamped_path = os.path.join(debug_dir, f"{name_prefix}_{timestamp}.html")
+        latest_path = os.path.join(debug_dir, f"latest_{name_prefix}.html")
+        with open(timestamped_path, 'w', encoding='utf-8') as f:
+            f.write(html_text)
+        with open(latest_path, 'w', encoding='utf-8') as f:
+            f.write(html_text)
+        logging.info(f"已保存抓取HTML: {timestamped_path} 以及 {latest_path}")
+    except Exception as e:
+        logging.error(f"保存抓取HTML出错: {e}")
 def extract_used_item_details(soup):
     """提取所有中古商品详情"""
     used_items = {}
@@ -196,6 +212,9 @@ def main():
     url = 'https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20'
     try:
         response = requests.get(url)
+        logging.info(f"GET {url} -> status {response.status_code}, length {len(response.text)}")
+        # 保存原始HTML以便在GitHub Actions中作为artifact调试
+        save_debug_html(response.text, name_prefix='rsp20_search')
         soup = BeautifulSoup(response.text, 'html.parser')
        
         # 提取所有中古商品详细信息
