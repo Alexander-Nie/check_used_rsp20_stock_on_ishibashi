@@ -56,11 +56,12 @@ def extract_used_item_details(soup):
     product_items = products_grid.find_all('a', class_='im-products-card')
    
     for item in product_items:
-        # 提取标题并检查是否含有"中古"
+        # 通过标签判断是否为中古：存在 .is-used 标签即视为中古
+        used_tag = item.select_one('.im-products-card-icons .is-used')
         title_element = item.find('div', class_='im-products-card-title')
-        if not title_element or '中古' not in title_element.text:
-            continue  # 如果标题不包含"中古"，跳过此项
-               
+        if not used_tag or not title_element:
+            continue  # 非中古或无标题，跳过
+
         title = title_element.text.strip()
        
         # 从href提取商品ID
@@ -90,13 +91,19 @@ def extract_used_item_details(soup):
         shop_element = item.find('span', {'data-field': 'narrow6'})
         shop = shop_element.text.strip() if shop_element else "店铺未知"
        
+        # 规范化URL：如果href是绝对地址，直接使用；否则拼接域名
+        if href.startswith('http://') or href.startswith('https://'):
+            full_url = href
+        else:
+            full_url = f"https://store.ishibashi.co.jp{href}"
+
         # 存储商品信息
         used_items[item_id] = {
             "title": title,
             "price": price,
             "shop": shop,
             "href": href,
-            "url": f"https://store.ishibashi.co.jp{href}"
+            "url": full_url
         }
    
     return used_items
