@@ -1,47 +1,65 @@
 name: Check Used Items
+
 on:
   schedule:
-    - cron: '0 */1 * * *'  # 每小时运行一次
+    - cron: '0 */1 * * *'  # 每小时运行一次（UTC）
   workflow_dispatch:  # 允许手动触发
+
 jobs:
   check-used-items:
     runs-on: ubuntu-latest
-    
+
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
-    
+
     permissions:
-      contents: write  # 需要写入权限用于推送日志和缓存文件
-    
+      contents: write  # 提交日志/缓存/调试文件回仓库
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-        cache: 'pip'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-      
-    - name: Run script
-      run: |
-        python check_used_items.py
-      env:
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        
-    - name: Commit and push logs and cache
-      if: always()  # 即使脚本失败也运行
-      run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-        git add check_used_items.log used_items_cache.json
-        # 只在有变更时提交
-        git diff-index --quiet HEAD || git commit -m "Update logs and cache [skip ci]"
-        git push
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies (requirements.txt 或兜底安装)
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            pip install requests beautifulsoup4 pytz
+          fi
+
+      - name: Run script
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python check_used_items.py
+
+      - name: Upload debug artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rsp20-debug
+          path: |
+            debug_html/**
+            check_used_items.log
+            used_items_cache.json
+          if-no-files-found: warn
+
+      - name: Commit and push logs, cache and debug html
+        if: always()
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add check_used_items.log used_items_cache.json debug_html || true
+          # 只在有变更时提交
+          git diff-index --quiet HEAD || git commit -m "Update logs, cache and debug html [skip ci]"
+          git push
+
