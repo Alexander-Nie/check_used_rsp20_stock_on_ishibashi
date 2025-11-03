@@ -56,10 +56,11 @@ def extract_used_item_details(soup):
     product_items = products_grid.find_all('a', class_='im-products-card')
    
     for item in product_items:
-        # 通过标签判断是否为中古：存在 .is-used 标签即视为中古
-        used_tag = item.select_one('.im-products-card-icons .is-used')
+        # 通过 data-name 判断是否为中古：icons 容器的 data-name 包含“中古”
+        icons_div = item.find('div', class_='im-products-card-icons')
+        data_name = icons_div.get('data-name', '') if icons_div else ''
         title_element = item.find('div', class_='im-products-card-title')
-        if not used_tag or not title_element:
+        if ('中古' not in data_name) or not title_element:
             continue  # 非中古或无标题，跳过
 
         title = title_element.text.strip()
