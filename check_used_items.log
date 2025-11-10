@@ -7435,3 +7435,6 @@
 11-10-2025 17:15:50 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 503, length 787
 11-10-2025 17:15:50 - 已保存抓取HTML: debug_html/rsp20_search_20251111_021550.html 以及 debug_html/latest_rsp20_search.html
 11-10-2025 17:15:50 - 执行过程中出错: HTTP 503
+11-10-2025 18:24:56 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 503, length 787
+11-10-2025 18:24:56 - 已保存抓取HTML: debug_html/rsp20_search_20251111_032456.html 以及 debug_html/latest_rsp20_search.html
+11-10-2025 18:24:56 - 执行过程中出错: HTTP 503
