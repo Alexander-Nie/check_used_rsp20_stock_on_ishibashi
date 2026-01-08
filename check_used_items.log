@@ -12640,3 +12640,11 @@
 01-08-2026 22:18:48 - 已保存抓取HTML: debug_html/rsp20_search_20260109_071848.html 以及 debug_html/latest_rsp20_search.html
 01-08-2026 22:18:48 - 01-09-2026 07:18:48: Used RSP20 has stock: 0
 01-08-2026 22:18:48 - 01-09-2026 07:18:48: No Used Data: RSP20
+01-08-2026 23:16:15 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 200, length 109168
+01-08-2026 23:16:15 - 已保存抓取HTML: debug_html/rsp20_search_20260109_081615.html 以及 debug_html/latest_rsp20_search.html
+01-08-2026 23:16:15 - 01-09-2026 08:16:15: Used RSP20 has stock: 1
+01-08-2026 23:16:16 - 变动通知: 🆕 新中古商品上架:
+标题: 【中古】YAMAHA / RSP20 REVSTAR MLB Moonlight Blue【3.67kg】【S/N:IHY068E】【横浜店】
+价格: ¥198,000
+横浜店
+链接: https://store.ishibashi.co.jp/view/item/000000099224
