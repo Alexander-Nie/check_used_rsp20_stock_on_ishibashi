@@ -13372,3 +13372,11 @@
 01-18-2026 05:21:05 - 已保存抓取HTML: debug_html/rsp20_search_20260118_142105.html 以及 debug_html/latest_rsp20_search.html
 01-18-2026 05:21:05 - 01-18-2026 14:21:05: Used RSP20 has stock: 0
 01-18-2026 05:21:05 - 01-18-2026 14:21:05: No Used Data: RSP20
+01-18-2026 06:27:50 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 200, length 105634
+01-18-2026 06:27:50 - 已保存抓取HTML: debug_html/rsp20_search_20260118_152750.html 以及 debug_html/latest_rsp20_search.html
+01-18-2026 06:27:50 - 01-18-2026 15:27:50: Used RSP20 has stock: 1
+01-18-2026 06:27:50 - 变动通知: 🆕 新中古商品上架:
+标题: 【中古】YAMAHA / RSP20 Moonlight Blue 【御茶ノ水本店】
+价格: ¥198,000
+御茶ノ水本店
+链接: https://store.ishibashi.co.jp/view/item/000000101244
