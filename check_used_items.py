@@ -231,7 +231,7 @@ def main():
         logging.info(f"{get_japan_time()}: Used RSP20 has stock: {used_count}")
        
         # 解析成功后再做健康检查（仅在14点发送一次）
-        check_time_and_send_health_message()
+        #check_time_and_send_health_message()
 
         if used_count > 0:
             # 比较当前数据和缓存数据，并发送相应通知
