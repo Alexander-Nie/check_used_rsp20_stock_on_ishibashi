@@ -18546,3 +18546,7 @@
 03-23-2026 19:46:09 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 503, length 787
 03-23-2026 19:46:09 - 已保存抓取HTML: debug_html/rsp20_search_20260324_044609.html 以及 debug_html/latest_rsp20_search.html
 03-23-2026 19:46:09 - 执行过程中出错: HTTP 503
+03-23-2026 20:35:10 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 200, length 91841
+03-23-2026 20:35:10 - 已保存抓取HTML: debug_html/rsp20_search_20260324_053510.html 以及 debug_html/latest_rsp20_search.html
+03-23-2026 20:35:10 - 03-24-2026 05:35:10: Used RSP20 has stock: 0
+03-23-2026 20:35:10 - 03-24-2026 05:35:10: No Used Data: RSP20
