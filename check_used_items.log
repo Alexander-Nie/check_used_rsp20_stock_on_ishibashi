@@ -23208,3 +23208,6 @@
 07-16-2026 09:10:33 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 200, length 95543
 07-16-2026 09:10:33 - 已保存抓取HTML: debug_html/rsp20_search_20260716_181033.html 以及 debug_html/latest_rsp20_search.html
 07-16-2026 09:10:34 - 07-16-2026 18:10:34: Used RSP20 has stock: 1
+07-16-2026 11:36:44 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 200, length 95543
+07-16-2026 11:36:44 - 已保存抓取HTML: debug_html/rsp20_search_20260716_203644.html 以及 debug_html/latest_rsp20_search.html
+07-16-2026 11:36:44 - 07-16-2026 20:36:44: Used RSP20 has stock: 1
