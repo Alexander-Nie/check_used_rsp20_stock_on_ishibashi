@@ -25366,3 +25366,6 @@
 价格: ¥218,000
 名古屋栄店
 链接: https://store.ishibashi.co.jp/view/item/000000166216
+08-23-2026 11:17:43 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 200, length 94827
+08-23-2026 11:17:43 - 已保存抓取HTML: debug_html/rsp20_search_20260823_201743.html 以及 debug_html/latest_rsp20_search.html
+08-23-2026 11:17:43 - 08-23-2026 20:17:43: Used RSP20 has stock: 1
