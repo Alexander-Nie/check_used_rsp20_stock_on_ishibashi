@@ -26830,3 +26830,11 @@
 11-03-2026 09:16:29 - 已保存抓取HTML: debug_html/rsp20_search_20261103_181629.html 以及 debug_html/latest_rsp20_search.html
 11-03-2026 09:16:29 - 11-03-2026 18:16:29: Used RSP20 has stock: 0
 11-03-2026 09:16:29 - 11-03-2026 18:16:29: No Used Data: RSP20
+11-03-2026 17:30:21 - GET https://store.ishibashi.co.jp/search?q=YAMAHA%E3%80%80RSP20 -> status 200, length 93707
+11-03-2026 17:30:21 - 已保存抓取HTML: debug_html/rsp20_search_20261104_023021.html 以及 debug_html/latest_rsp20_search.html
+11-03-2026 17:30:21 - 11-04-2026 02:30:21: Used RSP20 has stock: 1
+11-03-2026 17:30:27 - 变动通知: 🆕 新中古商品上架:
+标题: 【中古】YAMAHA / 60th Anniversary REVSTAR - RSP20B 60TH Noble Black Burst 【御茶ノ水本店FINEST GUITARS】
+价格: ¥538,000
+御茶ノ水本店 FINEST GUITARS
+链接: https://store.ishibashi.co.jp/view/item/000000189049
